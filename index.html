@@ -2,39 +2,27 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Odliczanie do 8 września</title>
+  <title>date with u</title>
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: #ffe6f0;
-      background-image: url('data:image/svg+xml;utf8,
-        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
-          <g stroke="%23d6336c" stroke-width="1.5" fill="none" opacity="0.08">
-            <path d="M100 20 C110 0, 140 0, 150 20 C170 30, 170 70, 150 80 C140 100, 170 120, 150 140 C140 160, 110 160, 100 140 C90 160, 60 160, 50 140 C30 120, 60 100, 50 80 C30 70, 30 30, 50 20 C60 0, 90 0, 100 20 Z"/>
-            <circle cx="60" cy="60" r="20"/>
-            <path d="M100 50 C120 40, 120 80, 100 70 C80 80, 80 40, 100 50 Z"/>
-            <path d="M30 130 C40 110, 70 110, 80 130 C90 150, 60 170, 50 150 C40 170, 10 150, 30 130 Z"/>
-          </g>
-        </svg>
-      ');
-      background-repeat: repeat;
+      background: linear-gradient(to right, #ffe6f0, #ffe0e6);
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .container {
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: white;
       padding: 60px 80px;
       border-radius: 25px;
       box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+      text-align: center;
       max-width: 95%;
     }
 
@@ -68,39 +56,30 @@
       color: #555;
     }
 
-    @media (max-width: 600px) {
-      .value {
-        font-size: 48px;
-      }
-      .label {
-        font-size: 18px;
-      }
-      .container {
-        padding: 40px 30px;
-      }
-    }
   </style>
 </head>
 <body>
 
+  
+
   <div class="container">
-    <h1>Do mojego powrotu zostało:</h1>
+    <h1>date with u:</h1>
     <div class="countdown" id="countdown">
       <div class="block">
         <div class="value" id="days">--</div>
-        <div class="label">dni</div>
+        <div class="label">days</div>
       </div>
       <div class="block">
         <div class="value" id="hours">--</div>
-        <div class="label">godzin</div>
+        <div class="label">hours</div>
       </div>
       <div class="block">
         <div class="value" id="minutes">--</div>
-        <div class="label">minut</div>
+        <div class="label">minutes</div>
       </div>
       <div class="block">
         <div class="value" id="seconds">--</div>
-        <div class="label">sekund</div>
+        <div class="label">seconds</div>
       </div>
     </div>
   </div>
