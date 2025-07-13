@@ -22,6 +22,7 @@
       padding: 30px 40px;
       border-radius: 15px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 90%;
     }
 
     h1 {
@@ -35,13 +36,13 @@
       font-weight: bold;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 15px;
     }
 
     .time {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
       flex-wrap: wrap;
     }
 
@@ -53,6 +54,12 @@
       font-size: 32px;
       color: #ff4d6d;
     }
+
+    .block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
@@ -60,36 +67,51 @@
     <h1>Do mojego powrotu zostało:</h1>
     <div class="countdown" id="countdown">
       <div class="time">
-        <div><span class="value" id="months">--</span><div class="unit">miesięcy</div></div>
-        <div><span class="value" id="weeks">--</span><div class="unit">tygodni</div></div>
-        <div><span class="value" id="days">--</span><div class="unit">dni</div></div>
-        <div><span class="value" id="hours">--</span><div class="unit">godzin</div></div>
-        <div><span class="value" id="minutes">--</span><div class="unit">minut</div></div>
-        <div><span class="value" id="seconds">--</span><div class="unit">sekund</div></div>
+        <div class="block"><span class="value" id="months">--</span><div class="unit">miesięcy</div></div>
+        <div class="block"><span class="value" id="weeks">--</span><div class="unit">tygodni</div></div>
+        <div class="block"><span class="value" id="days">--</span><div class="unit">dni</div></div>
+        <div class="block"><span class="value" id="hours">--</span><div class="unit">godzin</div></div>
+        <div class="block"><span class="value" id="minutes">--</span><div class="unit">minut</div></div>
+        <div class="block"><span class="value" id="seconds">--</span><div class="unit">sekund</div></div>
       </div>
     </div>
   </div>
 
   <script>
-    const countdownDate = new Date("2025-09-08T00:00:00").getTime();
+    const targetDate = new Date("2025-09-08T00:00:00");
 
     function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = countdownDate - now;
+      const now = new Date();
+      let delta = Math.floor((targetDate - now) / 1000); // w sekundach
 
-      if (distance <= 0) {
+      if (delta <= 0) {
         document.getElementById("countdown").innerHTML = "<h2>Już jestem! ❤️</h2>";
         return;
       }
 
-      // Obliczenia
-      const seconds = Math.floor((distance / 1000) % 60);
-      const minutes = Math.floor((distance / 1000 / 60) % 60);
-      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-      const days = Math.floor((distance / (1000 * 60 * 60 * 24)) % 7);
-      const weeks = Math.floor((distance / (1000 * 60 * 60 * 24 * 7)) % 4.345); // ok. tygodnie w miesiącu
-      const months = Math.floor(distance / (1000 * 60 * 60 * 24 * 30.44)); // średnia długość miesiąca
+      const seconds = delta % 60;
+      delta = Math.floor(delta / 60);
 
+      const minutes = delta % 60;
+      delta = Math.floor(delta / 60);
+
+      const hours = delta % 24;
+      delta = Math.floor(delta / 24);
+
+      const weeks = Math.floor(delta / 7);
+      const days = delta % 7;
+
+      const nowMonth = now.getMonth();
+      const nowYear = now.getFullYear();
+
+      let months;
+      if (targetDate.getDate() < now.getDate()) {
+        months = (targetDate.getFullYear() - nowYear) * 12 + (targetDate.getMonth() - nowMonth) - 1;
+      } else {
+        months = (targetDate.getFullYear() - nowYear) * 12 + (targetDate.getMonth() - nowMonth);
+      }
+
+      // Aktualizacja wyświetlanych danych
       document.getElementById("months").innerText = months;
       document.getElementById("weeks").innerText = weeks;
       document.getElementById("days").innerText = days;
@@ -98,6 +120,7 @@
       document.getElementById("seconds").innerText = seconds;
     }
 
+    // Start + odświeżanie co sekundę
     updateCountdown();
     setInterval(updateCountdown, 1000);
   </script>
