@@ -2,37 +2,40 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>date with u</title>
+  <title>Odliczanie do 8 września</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to right, #ffe6f0, #ffe0e6);
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .container {
       background-color: white;
-      padding: 40px 50px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 60px 80px;
+      border-radius: 25px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 95%;
     }
 
     h1 {
-      font-size: 24px;
-      margin-bottom: 30px;
+      font-size: 36px;
+      margin-bottom: 40px;
       color: #d6336c;
     }
 
     .countdown {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 50px;
       flex-wrap: wrap;
     }
 
@@ -43,36 +46,83 @@
     }
 
     .value {
-      font-size: 36px;
+      font-size: 64px;
       font-weight: bold;
       color: #ff4d6d;
     }
 
     .label {
-      font-size: 18px;
+      font-size: 24px;
       color: #555;
+    }
+
+    /* Kwiaty w rogach */
+    .flower {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      opacity: 0.15;
+    }
+
+    .flower.top-left {
+      top: 20px;
+      left: 20px;
+      transform: rotate(-20deg);
+    }
+
+    .flower.top-right {
+      top: 20px;
+      right: 20px;
+      transform: rotate(20deg);
+    }
+
+    .flower.bottom-left {
+      bottom: 20px;
+      left: 20px;
+      transform: rotate(20deg);
+    }
+
+    .flower.bottom-right {
+      bottom: 20px;
+      right: 20px;
+      transform: rotate(-20deg);
     }
   </style>
 </head>
 <body>
+
+  <!-- Dekoracyjne kwiaty -->
+  <svg class="flower top-left" viewBox="0 0 100 100" fill="none">
+    <path d="M50 15 C55 5, 70 5, 75 15 C85 20, 85 35, 75 40 C70 50, 85 60, 75 70 C70 85, 55 85, 50 75 C45 85, 30 85, 25 70 C15 60, 30 50, 25 40 C15 35, 15 20, 25 15 C30 5, 45 5, 50 15 Z" stroke="#d6336c" stroke-width="2"/>
+  </svg>
+  <svg class="flower top-right" viewBox="0 0 100 100" fill="none">
+    <use href=".flower.top-left path"/>
+  </svg>
+  <svg class="flower bottom-left" viewBox="0 0 100 100" fill="none">
+    <use href=".flower.top-left path"/>
+  </svg>
+  <svg class="flower bottom-right" viewBox="0 0 100 100" fill="none">
+    <use href=".flower.top-left path"/>
+  </svg>
+
   <div class="container">
-    <h1>date with u:</h1>
+    <h1>Do mojego powrotu zostało:</h1>
     <div class="countdown" id="countdown">
       <div class="block">
         <div class="value" id="days">--</div>
-        <div class="label">days</div>
+        <div class="label">dni</div>
       </div>
       <div class="block">
         <div class="value" id="hours">--</div>
-        <div class="label">hours</div>
+        <div class="label">godzin</div>
       </div>
       <div class="block">
         <div class="value" id="minutes">--</div>
-        <div class="label">minutes</div>
+        <div class="label">minut</div>
       </div>
       <div class="block">
         <div class="value" id="seconds">--</div>
-        <div class="label">seconds</div>
+        <div class="label">sekund</div>
       </div>
     </div>
   </div>
