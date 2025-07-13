@@ -9,7 +9,6 @@
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to right, #ffe6f0, #ffe0e6);
-      color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -19,40 +18,22 @@
 
     .container {
       background-color: white;
-      padding: 30px 40px;
-      border-radius: 15px;
+      padding: 40px 50px;
+      border-radius: 20px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      max-width: 90%;
     }
 
     h1 {
       font-size: 24px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
       color: #d6336c;
     }
 
     .countdown {
-      font-size: 28px;
-      font-weight: bold;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .time {
       display: flex;
       justify-content: center;
-      gap: 25px;
+      gap: 30px;
       flex-wrap: wrap;
-    }
-
-    .unit {
-      font-size: 20px;
-    }
-
-    .value {
-      font-size: 32px;
-      color: #ff4d6d;
     }
 
     .block {
@@ -60,19 +41,38 @@
       flex-direction: column;
       align-items: center;
     }
+
+    .value {
+      font-size: 36px;
+      font-weight: bold;
+      color: #ff4d6d;
+    }
+
+    .label {
+      font-size: 18px;
+      color: #555;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Do mojego powrotu zostało:</h1>
     <div class="countdown" id="countdown">
-      <div class="time">
-        <div class="block"><span class="value" id="months">--</span><div class="unit">miesięcy</div></div>
-        <div class="block"><span class="value" id="weeks">--</span><div class="unit">tygodni</div></div>
-        <div class="block"><span class="value" id="days">--</span><div class="unit">dni</div></div>
-        <div class="block"><span class="value" id="hours">--</span><div class="unit">godzin</div></div>
-        <div class="block"><span class="value" id="minutes">--</span><div class="unit">minut</div></div>
-        <div class="block"><span class="value" id="seconds">--</span><div class="unit">sekund</div></div>
+      <div class="block">
+        <div class="value" id="days">--</div>
+        <div class="label">dni</div>
+      </div>
+      <div class="block">
+        <div class="value" id="hours">--</div>
+        <div class="label">godzin</div>
+      </div>
+      <div class="block">
+        <div class="value" id="minutes">--</div>
+        <div class="label">minut</div>
+      </div>
+      <div class="block">
+        <div class="value" id="seconds">--</div>
+        <div class="label">sekund</div>
       </div>
     </div>
   </div>
@@ -82,45 +82,24 @@
 
     function updateCountdown() {
       const now = new Date();
-      let delta = Math.floor((targetDate - now) / 1000); // w sekundach
+      const distance = targetDate - now;
 
-      if (delta <= 0) {
+      if (distance <= 0) {
         document.getElementById("countdown").innerHTML = "<h2>Już jestem! ❤️</h2>";
         return;
       }
 
-      const seconds = delta % 60;
-      delta = Math.floor(delta / 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+      const minutes = Math.floor((distance / 1000 / 60) % 60);
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
 
-      const minutes = delta % 60;
-      delta = Math.floor(delta / 60);
-
-      const hours = delta % 24;
-      delta = Math.floor(delta / 24);
-
-      const weeks = Math.floor(delta / 7);
-      const days = delta % 7;
-
-      const nowMonth = now.getMonth();
-      const nowYear = now.getFullYear();
-
-      let months;
-      if (targetDate.getDate() < now.getDate()) {
-        months = (targetDate.getFullYear() - nowYear) * 12 + (targetDate.getMonth() - nowMonth) - 1;
-      } else {
-        months = (targetDate.getFullYear() - nowYear) * 12 + (targetDate.getMonth() - nowMonth);
-      }
-
-      // Aktualizacja wyświetlanych danych
-      document.getElementById("months").innerText = months;
-      document.getElementById("weeks").innerText = weeks;
       document.getElementById("days").innerText = days;
       document.getElementById("hours").innerText = hours;
       document.getElementById("minutes").innerText = minutes;
       document.getElementById("seconds").innerText = seconds;
     }
 
-    // Start + odświeżanie co sekundę
     updateCountdown();
     setInterval(updateCountdown, 1000);
   </script>
