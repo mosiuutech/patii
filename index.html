@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+ 
+  <!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
@@ -24,6 +26,7 @@
       box-shadow: 0 6px 30px rgba(0,0,0,0.15);
       text-align: center;
       max-width: 95%;
+      z-index: 1;
     }
 
     h1 {
@@ -56,53 +59,38 @@
       color: #555;
     }
 
-    /* Kwiaty w rogach */
+    /* Kwiaty */
     .flower {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
+      stroke: #d6336c;
+      stroke-width: 2;
+      fill: none;
       opacity: 0.15;
+      z-index: 0;
     }
 
-    .flower.top-left {
-      top: 20px;
-      left: 20px;
-      transform: rotate(-20deg);
-    }
-
-    .flower.top-right {
-      top: 20px;
-      right: 20px;
-      transform: rotate(20deg);
-    }
-
-    .flower.bottom-left {
-      bottom: 20px;
-      left: 20px;
-      transform: rotate(20deg);
-    }
-
-    .flower.bottom-right {
-      bottom: 20px;
-      right: 20px;
-      transform: rotate(-20deg);
-    }
+    .top-left { top: 20px; left: 20px; transform: rotate(-15deg); }
+    .top-right { top: 20px; right: 20px; transform: rotate(15deg); }
+    .bottom-left { bottom: 20px; left: 20px; transform: rotate(15deg); }
+    .bottom-right { bottom: 20px; right: 20px; transform: rotate(-15deg); }
   </style>
 </head>
 <body>
 
-  <!-- Dekoracyjne kwiaty -->
-  <svg class="flower top-left" viewBox="0 0 100 100" fill="none">
-    <path d="M50 15 C55 5, 70 5, 75 15 C85 20, 85 35, 75 40 C70 50, 85 60, 75 70 C70 85, 55 85, 50 75 C45 85, 30 85, 25 70 C15 60, 30 50, 25 40 C15 35, 15 20, 25 15 C30 5, 45 5, 50 15 Z" stroke="#d6336c" stroke-width="2"/>
+  <!-- Dekoracyjne kwiaty SVG -->
+  <svg class="flower top-left" viewBox="0 0 100 100">
+    <path d="M50 10 C60 0, 80 0, 90 10 C100 20, 100 40, 90 50 C100 60, 100 80, 90 90 C80 100, 60 100, 50 90 C40 100, 20 100, 10 90 C0 80, 0 60, 10 50 C0 40, 0 20, 10 10 C20 0, 40 0, 50 10 Z" />
   </svg>
-  <svg class="flower top-right" viewBox="0 0 100 100" fill="none">
-    <use href=".flower.top-left path"/>
+  <svg class="flower top-right" viewBox="0 0 100 100">
+    <path d="M50 10 C60 0, 80 0, 90 10 C100 20, 100 40, 90 50 C100 60, 100 80, 90 90 C80 100, 60 100, 50 90 C40 100, 20 100, 10 90 C0 80, 0 60, 10 50 C0 40, 0 20, 10 10 C20 0, 40 0, 50 10 Z" />
   </svg>
-  <svg class="flower bottom-left" viewBox="0 0 100 100" fill="none">
-    <use href=".flower.top-left path"/>
+  <svg class="flower bottom-left" viewBox="0 0 100 100">
+    <path d="M50 10 C60 0, 80 0, 90 10 C100 20, 100 40, 90 50 C100 60, 100 80, 90 90 C80 100, 60 100, 50 90 C40 100, 20 100, 10 90 C0 80, 0 60, 10 50 C0 40, 0 20, 10 10 C20 0, 40 0, 50 10 Z" />
   </svg>
-  <svg class="flower bottom-right" viewBox="0 0 100 100" fill="none">
-    <use href=".flower.top-left path"/>
+  <svg class="flower bottom-right" viewBox="0 0 100 100">
+    <path d="M50 10 C60 0, 80 0, 90 10 C100 20, 100 40, 90 50 C100 60, 100 80, 90 90 C80 100, 60 100, 50 90 C40 100, 20 100, 10 90 C0 80, 0 60, 10 50 C0 40, 0 20, 10 10 C20 0, 40 0, 50 10 Z" />
   </svg>
 
   <div class="container">
